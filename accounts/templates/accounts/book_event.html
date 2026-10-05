@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Event | NOVA2026</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #182848, transparent 35%),
+                radial-gradient(circle at bottom right, #301b55, transparent 35%),
+                #070b17;
+            color: white;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            width: 100%;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 8, 20, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #d8deef;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00e5ff;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 55px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .page-title h1 span {
+            color: #00e5ff;
+        }
+
+        .page-title p {
+            color: #9da8c2;
+        }
+
+        /* =========================
+           BOOKING LAYOUT
+        ========================= */
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 22px;
+            padding: 30px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        /* =========================
+           EVENT DETAILS
+        ========================= */
+
+        .event-image {
+            width: 100%;
+            height: 230px;
+            border-radius: 16px;
+            object-fit: cover;
+            margin-bottom: 22px;
+        }
+
+        .event-placeholder {
+            width: 100%;
+            height: 230px;
+            border-radius: 16px;
+            margin-bottom: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111b3d,
+                    #241447
+                );
+
+            font-size: 70px;
+        }
+
+        .category {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: rgba(0,229,255,0.12);
+            color: #00e5ff;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .event-title {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #aeb8d0;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .event-info {
+            display: grid;
+            gap: 14px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #dce2f2;
+        }
+
+        .info-icon {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(0,229,255,0.1);
+            border-radius: 10px;
+        }
+
+        /* =========================
+           BOOKING FORM
+        ========================= */
+
+        .booking-title {
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 9px;
+            color: #cfd6e8;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+
+            background: rgba(0,0,0,0.25);
+            color: white;
+
+            outline: none;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0,229,255,0.15);
+        }
+
+        /* =========================
+           PRICE BOX
+        ========================= */
+
+        .price-box {
+            margin-top: 25px;
+            padding: 20px;
+
+            background: rgba(0,229,255,0.07);
+            border: 1px solid rgba(0,229,255,0.18);
+
+            border-radius: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #b9c2d8;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .total-price {
+            color: #00e5ff;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .book-btn {
+            width: 100%;
+            margin-top: 25px;
+
+            padding: 16px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #00e5ff,
+                #7c4dff
+            );
+
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,229,255,0.25);
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+
+            color: #9da8c2;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            color: #00e5ff;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            margin-top: 40px;
+            color: #66718b;
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 850px) {
+
+            .booking-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .page-title h1 {
+                font-size: 32px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            NOVA<span>2026</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'student_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'events' %}">
+                Events
+            </a>
+
+            <a href="{% url 'my_tickets' %}">
+                My Tickets
+            </a>
+
+            <a href="{% url 'student_profile' %}">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="container">
+
+        <div class="page-title">
+
+            <h1>
+                Book Your <span>Event</span>
+            </h1>
+
+            <p>
+                Secure your place in the NOVA experience.
+            </p>
+
+        </div>
+
+
+        <div class="booking-layout">
+
+            <!-- =========================
+                 EVENT INFORMATION
+            ========================= -->
+
+            <div class="card">
+
+                {% if event.image %}
+
+                    <img
+                        src="{{ event.image }}"
+                        class="event-image"
+                        alt="{{ event.title }}"
+                    >
+
+                {% else %}
+
+                    <div class="event-placeholder">
+                        🎫
+                    </div>
+
+                {% endif %}
+
+
+                <span class="category">
+                    {{ event.get_category_display }}
+                </span>
+
+
+                <h2 class="event-title">
+                    {{ event.title }}
+                </h2>
+
+
+                <p class="description">
+                    {{ event.description }}
+                </p>
+
+
+                <div class="event-info">
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            📅
+                        </div>
+
+                        <div>
+                            <strong>Date</strong><br>
+                            {{ event.event_date|date:"d M Y" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            ⏰
+                        </div>
+
+                        <div>
+                            <strong>Time</strong><br>
+                            {{ event.event_time|time:"g:i A" }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            📍
+                        </div>
+
+                        <div>
+                            <strong>Location</strong><br>
+                            {{ event.location }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-row">
+
+                        <div class="info-icon">
+                            💰
+                        </div>
+
+                        <div>
+                            <strong>Price</strong><br>
+                            ₹{{ event.price }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 BOOKING FORM
+            ========================= -->
+
+            <div class="card">
+
+                <h2 class="booking-title">
+                    🎟️ Ticket Booking
+                </h2>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="form-group">
+
+                        <label for="tickets">
+                            Number of Tickets
+                        </label>
+
+                        <input
+                            type="number"
+                            id="tickets"
+                            name="tickets"
+                            value="1"
+                            min="1"
+                            required
+                            oninput="calculateTotal()"
+                        >
+
+                    </div>
+
+
+                    <!-- PRICE SUMMARY -->
+
+                    <div class="price-box">
+
+                        <div class="price-row">
+
+                            <span>
+                                Ticket Price
+                            </span>
+
+                            <span>
+                                ₹{{ event.price }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="price-row">
+
+                            <span>
+                                Tickets
+                            </span>
+
+                            <span id="ticketCount">
+                                1
+                            </span>
+
+                        </div>
+
+
+                        <div class="total-row">
+
+                            <span>
+                                Total
+                            </span>
+
+                            <span class="total-price">
+                                ₹<span id="totalPrice">{{ event.price }}</span>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="book-btn"
+                    >
+                        🎟️ Confirm Booking
+                    </button>
+
+
+                    <a
+                        href="{% url 'events' %}"
+                        class="back-btn"
+                    >
+                        ← Back to Events
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 NOVA2026 · Intelligent Event & Ticket Platform
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function calculateTotal() {
+
+            const ticketsInput =
+                document.getElementById("tickets");
+
+            const ticketCount =
+                document.getElementById("ticketCount");
+
+            const totalPrice =
+                document.getElementById("totalPrice");
+
+            const price =
+                parseFloat("{{ event.price }}");
+
+            let tickets =
+                parseInt(ticketsInput.value);
+
+            if (isNaN(tickets) || tickets < 1) {
+                tickets = 1;
+            }
+
+            ticketCount.innerText = tickets;
+
+            const total =
+                price * tickets;
+
+            totalPrice.innerText =
+                total.toFixed(2);
+        }
+
+        calculateTotal();
+
+    </script>
+
+</body>
+</html>

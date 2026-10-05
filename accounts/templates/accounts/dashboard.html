@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA2026 | Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(circle at 10% 10%, #25104d, transparent 30%),
+                radial-gradient(circle at 90% 90%, #063b52, transparent 30%),
+                #050816;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5, 8, 22, 0.9);
+
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+            backdrop-filter: blur(15px);
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            color: #9b5cff;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #dbeafe;
+
+            padding: 9px 13px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(155,92,255,0.2);
+
+            color: white;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 92%;
+
+            max-width: 1150px;
+
+            margin: 45px auto;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,0.18),
+                    rgba(0,229,255,0.08)
+                );
+
+            border: 1px solid rgba(155,92,255,0.3);
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 0 40px rgba(123,92,255,0.08);
+        }
+
+        .welcome h1 {
+            font-size: 38px;
+
+            margin-bottom: 10px;
+        }
+
+        .welcome h1 span {
+            background:
+                linear-gradient(
+                    90deg,
+                    #9b5cff,
+                    #00e5ff
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome p {
+            color: #94a3b8;
+
+            font-size: 16px;
+        }
+
+        /* ================= STATISTICS ================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: rgba(15,23,42,0.88);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(0,229,255,0.3);
+        }
+
+        .stat-icon {
+            font-size: 30px;
+
+            margin-bottom: 15px;
+        }
+
+        .stat-card h3 {
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 32px;
+
+            font-weight: 900;
+        }
+
+        /* ================= PROFILE ================= */
+
+        .section-title {
+            font-size: 24px;
+
+            margin-bottom: 18px;
+        }
+
+        .profile-card {
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: rgba(15,23,42,0.88);
+
+            border: 1px solid rgba(155,92,255,0.25);
+
+            margin-bottom: 30px;
+        }
+
+        .profile-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+        }
+
+        .profile-item {
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,0.04);
+        }
+
+        .profile-item small {
+            display: block;
+
+            color: #64748b;
+
+            margin-bottom: 6px;
+        }
+
+        .profile-item strong {
+            color: white;
+        }
+
+        /* ================= BOOKINGS ================= */
+
+        .booking-card {
+            padding: 25px;
+
+            border-radius: 20px;
+
+            background: rgba(15,23,42,0.88);
+
+            border: 1px solid rgba(0,229,255,0.2);
+
+            margin-bottom: 18px;
+        }
+
+        .booking-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            align-items: center;
+
+            margin-bottom: 20px;
+        }
+
+        .booking-header h3 {
+            font-size: 20px;
+        }
+
+        .status {
+            padding: 7px 13px;
+
+            border-radius: 30px;
+
+            background: rgba(34,197,94,0.12);
+
+            border: 1px solid rgba(34,197,94,0.3);
+
+            color: #4ade80;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .booking-info {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            padding: 13px;
+
+            border-radius: 10px;
+
+            background: rgba(255,255,255,0.04);
+        }
+
+        .info-box small {
+            display: block;
+
+            color: #64748b;
+
+            margin-bottom: 5px;
+        }
+
+        .info-box strong {
+            font-size: 14px;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .actions {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 18px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+            background: rgba(255,255,255,0.06);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+
+            background: rgba(155,92,255,0.2);
+        }
+
+        .btn-primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #2563eb
+                );
+
+            border: none;
+        }
+
+        .btn-cyan {
+            background:
+                linear-gradient(
+                    135deg,
+                    #0891b2,
+                    #2563eb
+                );
+
+            border: none;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty {
+            text-align: center;
+
+            padding: 45px;
+
+            border-radius: 20px;
+
+            background: rgba(15,23,42,0.8);
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .empty p {
+            color: #94a3b8;
+
+            margin: 10px 0 20px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            padding: 35px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:800px) {
+
+            .navbar {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-info {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h1 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        NOVA<span>2026</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'student_dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'events' %}">
+            Events
+        </a>
+
+        <a href="{% url 'my_tickets' %}">
+            🎟️ Tickets
+        </a>
+
+        <a href="{% url 'notifications' %}">
+            🔔 Notifications
+        </a>
+
+        <a href="{% url 'student_profile' %}">
+            👤 Profile
+        </a>
+
+        <a href="{% url 'nova_ai' %}">
+            🤖 NOVA AI
+        </a>
+
+        <a href="{% url 'student_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <h1>
+            Welcome,
+            <span>
+                {{ request.user.get_full_name|default:request.user.username }}
+            </span>
+            👋
+        </h1>
+
+        <p>
+            Welcome to your intelligent NOVA2026 student ecosystem.
+        </p>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🎟️
+            </div>
+
+            <h3>
+                Total Tickets
+            </h3>
+
+            <div class="number">
+                {{ total_tickets }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                📋
+            </div>
+
+            <h3>
+                Total Bookings
+            </h3>
+
+            <div class="number">
+                {{ total_bookings }}
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">
+                🔔
+            </div>
+
+            <h3>
+                Notifications
+            </h3>
+
+            <div class="number">
+                {{ unread_notifications }}
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <h2 class="section-title">
+        👤 Student Information
+    </h2>
+
+
+    {% if profile %}
+
+
+        <div class="profile-card">
+
+
+            <div class="profile-grid">
+
+
+                <div class="profile-item">
+
+                    <small>
+                        Full Name
+                    </small>
+
+                    <strong>
+                        {{ request.user.get_full_name|default:request.user.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <small>
+                        Course
+                    </small>
+
+                    <strong>
+                        {{ profile.course|default:"Not Added" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <small>
+                        Semester
+                    </small>
+
+                    <strong>
+                        {{ profile.semester|default:"Not Added" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <small>
+                        Register Number
+                    </small>
+
+                    <strong>
+                        {{ profile.register_number|default:"Not Added" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <small>
+                        Roll Number
+                    </small>
+
+                    <strong>
+                        {{ profile.roll_number|default:"Not Added" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-item">
+
+                    <small>
+                        Phone
+                    </small>
+
+                    <strong>
+                        {{ profile.phone|default:"Not Added" }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="actions" style="margin-top:20px;">
+
+                <a
+                    href="{% url 'student_profile' %}"
+                    class="btn btn-primary"
+                >
+                    👤 View Profile
+                </a>
+
+                <a
+                    href="{% url 'edit_profile' %}"
+                    class="btn"
+                >
+                    ✏️ Edit Profile
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+            <h3>
+                Student profile not created yet
+            </h3>
+
+            <p>
+                Add your student information to complete your profile.
+            </p>
+
+            <a
+                href="{% url 'edit_profile' %}"
+                class="btn btn-primary"
+            >
+                ✏️ Create Profile
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+    <!-- BOOKINGS -->
+
+    <h2 class="section-title">
+        🎟️ Recent Bookings
+    </h2>
+
+
+    {% if bookings %}
+
+
+        {% for booking in bookings %}
+
+
+            <div class="booking-card">
+
+
+                <div class="booking-header">
+
+                    <h3>
+                        🚀 {{ booking.event.title }}
+                    </h3>
+
+                    <div class="status">
+                        {{ booking.status }}
+                    </div>
+
+                </div>
+
+
+                <div class="booking-info">
+
+
+                    <div class="info-box">
+
+                        <small>
+                            📍 Location
+                        </small>
+
+                        <strong>
+                            {{ booking.event.location }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            📅 Date
+                        </small>
+
+                        <strong>
+                            {{ booking.event.event_date|date:"d M Y" }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            ⏰ Time
+                        </small>
+
+                        <strong>
+                            {{ booking.event.event_time|time:"h:i A" }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            🎫 Tickets
+                        </small>
+
+                        <strong>
+                            {{ booking.tickets }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            🆔 Booking ID
+                        </small>
+
+                        <strong>
+                            #{{ booking.id }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <small>
+                            💰 Price
+                        </small>
+
+                        <strong>
+                            ₹{{ booking.event.price }}
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="actions">
+
+                    <a
+                        href="{% url 'digital_ticket' booking.id %}"
+                        class="btn btn-primary"
+                    >
+                        🎟️ Digital Ticket
+                    </a>
+
+
+                    <a
+                        href="{% url 'verify_ticket' %}"
+                        class="btn btn-cyan"
+                    >
+                        🔍 Verify
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+            <h3>
+                No bookings yet
+            </h3>
+
+            <p>
+                Explore NOVA2026 events and book your first experience.
+            </p>
+
+            <a
+                href="{% url 'events' %}"
+                class="btn btn-primary"
+            >
+                🚀 Explore Events
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</main>
+
+
+<footer>
+
+    © 2026 NOVA2026 — Intelligent Event Experience
+
+</footer>
+
+
+</body>
+
+</html>

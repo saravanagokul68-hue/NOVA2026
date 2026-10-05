@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA2026 | Notifications</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #26104f,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #073b52,
+                    transparent 35%
+                ),
+                #050816;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5, 8, 22, 0.9);
+
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+
+            color: #9b5cff;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #dbeafe;
+
+            padding: 9px 13px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(155,92,255,0.2);
+
+            color: white;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            width: 92%;
+
+            max-width: 950px;
+
+            margin: 55px auto;
+        }
+
+        /* HEADING */
+
+        .heading {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+
+            margin-bottom: 10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #9b5cff,
+                    #00e5ff
+                );
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .heading p {
+            color: #94a3b8;
+        }
+
+        /* NOTIFICATION CARD */
+
+        .notification-card {
+            padding: 22px;
+
+            margin-bottom: 18px;
+
+            display: flex;
+
+            gap: 20px;
+
+            align-items: flex-start;
+
+            background: rgba(15,23,42,0.9);
+
+            border: 1px solid rgba(155,92,255,0.25);
+
+            border-radius: 18px;
+
+            transition: 0.3s;
+        }
+
+        .notification-card:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(0,229,255,0.4);
+
+            box-shadow:
+                0 10px 30px rgba(0,229,255,0.08);
+        }
+
+        .notification-icon {
+            width: 55px;
+
+            height: 55px;
+
+            min-width: 55px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            border-radius: 15px;
+
+            font-size: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(155,92,255,0.25),
+                    rgba(0,229,255,0.15)
+                );
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-content h2 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+        .notification-content p {
+            color: #cbd5e1;
+
+            line-height: 1.6;
+
+            margin-bottom: 8px;
+        }
+
+        .date {
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+
+            padding: 75px 25px;
+
+            background: rgba(15,23,42,0.85);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            border-radius: 22px;
+        }
+
+        .empty-icon {
+            font-size: 65px;
+
+            margin-bottom: 20px;
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #94a3b8;
+
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #2563eb
+                );
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(124,58,237,0.3);
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 35px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:700px) {
+
+            .navbar {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
+
+            .notification-card {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        NOVA<span>2026</span>
+
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'student_dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'events' %}">
+            Events
+        </a>
+
+        <a href="{% url 'my_tickets' %}">
+            🎟️ My Tickets
+        </a>
+
+        <a href="{% url 'student_profile' %}">
+            👤 Profile
+        </a>
+
+        <a href="{% url 'student_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="container">
+
+
+    <div class="heading">
+
+        <h1>
+            🔔 Notifications
+        </h1>
+
+        <p>
+            Stay updated with your NOVA2026 activities
+        </p>
+
+    </div>
+
+
+    {% if notifications %}
+
+
+        {% for notification in notifications %}
+
+
+            <div class="notification-card">
+
+
+                <div class="notification-icon">
+
+                    {% if "Booking" in notification.title %}
+
+                        🎟️
+
+                    {% elif "Event" in notification.title %}
+
+                        🚀
+
+                    {% elif "Ticket" in notification.title %}
+
+                        🎫
+
+                    {% else %}
+
+                        🔔
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="notification-content">
+
+
+                    <h2>
+
+                        {{ notification.title }}
+
+                    </h2>
+
+
+                    <p>
+
+                        {{ notification.message }}
+
+                    </p>
+
+
+                    <div class="date">
+
+                        🕒
+                        {{ notification.created_at|date:"d M Y, h:i A" }}
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <div class="empty">
+
+
+            <div class="empty-icon">
+
+                🔔
+
+            </div>
+
+
+            <h2>
+
+                No Notifications
+
+            </h2>
+
+
+            <p>
+
+                You don't have any notifications yet.
+
+            </p>
+
+
+            <a
+                href="{% url 'events' %}"
+                class="btn"
+            >
+
+                🚀 Explore Events
+
+            </a>
+
+
+        </div>
+
+
+    {% endif %}
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    © 2026 NOVA2026 — Intelligent Event Experience
+
+</footer>
+
+
+</body>
+
+</html>

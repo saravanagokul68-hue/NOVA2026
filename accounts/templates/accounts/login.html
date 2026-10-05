@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>NOVA2026 | Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(
+                    circle at center,
+                    #211b50 0%,
+                    #0e1224 40%,
+                    #080b16 75%
+                );
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+        /* BACK HOME */
+
+        .back-home {
+            position: fixed;
+            top: 25px;
+            left: 30px;
+
+            color: #aeb5cc;
+            text-decoration: none;
+
+            font-size: 15px;
+        }
+
+        .back-home:hover {
+            color: white;
+        }
+
+        /* LOGIN CONTAINER */
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        /* LOGO */
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            font-size: 38px;
+            font-weight: bold;
+            color: #8b6cff;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            color: #8f97ad;
+            margin-top: 8px;
+        }
+
+        /* CARD */
+
+        .login-card {
+
+            background: rgba(18, 24, 42, 0.96);
+
+            border: 1px solid #303653;
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0, 0, 0, 0.4);
+        }
+
+        .login-card h1 {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #aeb5cc;
+
+            margin-bottom: 30px;
+        }
+
+        /* ERROR */
+
+        .error {
+
+            background: #321824;
+
+            border: 1px solid #71334a;
+
+            color: #ff9bb7;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+        }
+
+        /* FORM */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+
+            color: #dce0ec;
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 14px 15px;
+
+            border-radius: 10px;
+
+            border: 1px solid #343b58;
+
+            background: #080b16;
+
+            color: white;
+
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #8b6cff;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(139, 108, 255, 0.12);
+        }
+
+        input::placeholder {
+
+            color: #626b84;
+        }
+
+        /* BUTTON */
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #8b6cff;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+
+            background: #6f52e8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(139, 108, 255, 0.25);
+        }
+
+        /* INFO */
+
+        .info {
+
+            text-align: center;
+
+            color: #6f7891;
+
+            font-size: 13px;
+
+            margin-top: 25px;
+
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        .footer {
+
+            text-align: center;
+
+            color: #6f7891;
+
+            font-size: 13px;
+
+            margin-top: 25px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 20px;
+            }
+
+            .back-home {
+                position: static;
+
+                display: block;
+
+                margin-bottom: 25px;
+
+                text-align: center;
+            }
+
+            .login-card {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<a
+    href="{% url 'home' %}"
+    class="back-home"
+>
+    ← Back to Home
+</a>
+
+
+<div class="login-container">
+
+
+    <!-- LOGO -->
+
+    <div class="logo-section">
+
+        <div class="logo">
+            NOVA2026
+        </div>
+
+        <div class="tagline">
+            Experience the Future 🚀
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN CARD -->
+
+    <div class="login-card">
+
+
+        <h1>
+            Welcome Back 👋
+        </h1>
+
+
+        <p class="subtitle">
+            Sign in to continue your NOVA journey.
+        </p>
+
+
+        {% if error %}
+
+            <div class="error">
+
+                ❌ {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+
+                Login to NOVA 🚀
+
+            </button>
+
+
+        </form>
+
+
+        <div class="info">
+
+            🔐 Your account is protected by
+            Django authentication.
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer">
+
+        © 2026 NOVA2026
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA2026 - Create Account</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #080b18;
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+        .register-box {
+            width: 400px;
+            padding: 40px;
+
+            background: #11162d;
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 0 40px rgba(124, 92, 255, 0.20);
+        }
+
+        .logo {
+            text-align: center;
+
+            font-size: 32px;
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .logo span {
+            color: #7c5cff;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #aaaec5;
+
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px;
+
+            margin-bottom: 18px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #202640;
+
+            color: white;
+
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: 2px solid #7c5cff;
+        }
+
+        button {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #7c5cff;
+
+            color: white;
+
+            font-size: 17px;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #6847f5;
+        }
+
+        .back {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #aaaec5;
+
+            text-decoration: none;
+        }
+
+        .message {
+            background: #351b32;
+
+            color: #ffb5d8;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            margin-bottom: 15px;
+
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="register-box">
+
+    <div class="logo">
+        NOVA<span>2026</span>
+    </div>
+
+    <div class="subtitle">
+        Create your NOVA account 🚀
+    </div>
+
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="message">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+
+        <label>
+            Username
+        </label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Choose a username"
+            required
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Create a password"
+            required
+        >
+
+
+        <label>
+            Confirm Password
+        </label>
+
+        <input
+            type="password"
+            name="confirm_password"
+            placeholder="Confirm your password"
+            required
+        >
+
+
+        <button type="submit">
+            Create Account 🚀
+        </button>
+
+    </form>
+
+
+    <a href="/login/" class="back">
+        Already have an account? Login
+    </a>
+
+</div>
+
+</body>
+
+</html>

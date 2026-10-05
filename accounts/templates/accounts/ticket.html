@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>NOVA | Digital Ticket</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top,
+                    #182044,
+                    #080b16 60%
+                );
+
+            color: white;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .ticket {
+
+            width: 420px;
+
+            background: #12182a;
+
+            border: 1px solid #303957;
+
+            border-radius: 24px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0, 0, 0, 0.5);
+
+        }
+
+
+        .logo {
+
+            text-align: center;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            color: #8b6cff;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #8d95ad;
+
+            font-size: 13px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .event-name {
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .details {
+
+            background: #0d1221;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+        }
+
+
+        .detail {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .detail:last-child {
+
+            margin-bottom: 0;
+
+        }
+
+
+        .label {
+
+            color: #8d95ad;
+
+            font-size: 12px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .value {
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+        }
+
+
+        .booking-id {
+
+            margin-top: 20px;
+
+            padding: 14px;
+
+            background: #1b2340;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            color: #bfc6df;
+
+        }
+
+
+        .qr-section {
+
+            text-align: center;
+
+            margin-top: 30px;
+
+            padding-top: 25px;
+
+            border-top: 1px dashed #444d6b;
+
+        }
+
+
+        .qr-section img {
+
+            width: 200px;
+
+            height: 200px;
+
+            background: white;
+
+            padding: 10px;
+
+            border-radius: 12px;
+
+        }
+
+
+        .qr-section p {
+
+            color: #8d95ad;
+
+            font-size: 14px;
+
+        }
+
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #686f88;
+
+            font-size: 12px;
+
+        }
+
+
+        .back-btn {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            padding: 12px;
+
+            background: #8b6cff;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #6f52e8;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="ticket">
+
+
+    <div class="logo">
+
+        NOVA2026
+
+    </div>
+
+
+    <div class="subtitle">
+
+        DIGITAL EVENT TICKET
+
+    </div>
+
+
+    <div class="event-name">
+
+        {{ booking.event.title }}
+
+    </div>
+
+
+    <div class="details">
+
+
+        <div class="detail">
+
+            <div class="label">
+                📍 Location
+            </div>
+
+            <div class="value">
+                {{ booking.event.location }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                📅 Date
+            </div>
+
+            <div class="value">
+                {{ booking.event.event_date }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                ⏰ Time
+            </div>
+
+            <div class="value">
+                {{ booking.event.event_time }}
+            </div>
+
+        </div>
+
+
+        <div class="detail">
+
+            <div class="label">
+                🎟️ Tickets
+            </div>
+
+            <div class="value">
+                {{ booking.tickets }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="booking-id">
+
+        Booking ID:
+
+        <strong>
+            #{{ booking.id }}
+        </strong>
+
+    </div>
+
+
+    <!-- QR CODE -->
+
+    <div class="qr-section">
+
+        <img
+            src="data:image/png;base64,{{ qr_code }}"
+            alt="NOVA QR Code"
+            width="200"
+            height="200"
+        >
+
+        <p>
+            Scan this QR code at the event entrance
+        </p>
+
+    </div>
+
+
+    <div class="footer">
+
+        Thank you for choosing NOVA 🚀
+
+    </div>
+
+
+    <a
+        href="{% url 'dashboard' %}"
+        class="back-btn"
+    >
+
+        ← Back to Dashboard
+
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>

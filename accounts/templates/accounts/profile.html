@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA2026 | My Profile</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #080b18, #101936, #070a14);
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 14, 35, 0.9);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #6ee7ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #d7def7;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #6ee7ff;
+        }
+
+        .logout {
+            padding: 9px 16px;
+            border-radius: 20px;
+            background: #ff4d6d;
+            color: white !important;
+        }
+
+        .logout:hover {
+            background: #ff3155;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .page-title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #aab4d6;
+        }
+
+        /* PROFILE CARD */
+
+        .profile-card {
+            background: rgba(20, 27, 55, 0.9);
+            border: 1px solid rgba(110, 231, 255, 0.2);
+            border-radius: 25px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6ee7ff, #6366f1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 0 30px rgba(110, 231, 255, 0.25);
+        }
+
+        .profile-header h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .profile-header p {
+            color: #9da8cc;
+        }
+
+        /* INFORMATION */
+
+        .section-title {
+            margin: 30px 0 20px;
+            font-size: 21px;
+            color: #6ee7ff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .info-box {
+            background: rgba(8, 12, 30, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #8e99bb;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 17px;
+            color: white;
+            word-break: break-word;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 13px 22px;
+            border-radius: 12px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #6ee7ff, #6366f1);
+            color: white;
+        }
+
+        .dashboard-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            padding: 50px 20px;
+            color: #aab4d6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            color: #6f7898;
+            font-size: 13px;
+            padding: 40px 20px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .nav-links a:nth-child(1),
+            .nav-links a:nth-child(2) {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+                margin-top: 30px;
+            }
+
+            .page-title h1 {
+                font-size: 30px;
+            }
+
+            .profile-card {
+                padding: 22px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            NOVA2026
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'events' %}">
+                Events
+            </a>
+
+            <a href="{% url 'student_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'student_profile' %}">
+                Profile
+            </a>
+
+            <a href="{% url 'notifications' %}">
+                🔔
+            </a>
+
+            <a href="{% url 'student_logout' %}" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+        <div class="page-title">
+
+            <h1>👤 My Profile</h1>
+
+            <p>
+                Manage your NOVA2026 student information
+            </p>
+
+        </div>
+
+
+        {% if profile %}
+
+        <div class="profile-card">
+
+            <!-- PROFILE HEADER -->
+
+            <div class="profile-header">
+
+                <div class="avatar">
+
+                    {% if request.user.first_name %}
+                        {{ request.user.first_name|first|upper }}
+                    {% else %}
+                        {{ request.user.username|first|upper }}
+                    {% endif %}
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        {% if request.user.first_name %}
+                            {{ request.user.first_name }}
+                            {{ request.user.last_name }}
+                        {% else %}
+                            {{ request.user.username }}
+                        {% endif %}
+                    </h2>
+
+                    <p>
+                        NOVA2026 Student
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PERSONAL INFORMATION -->
+
+            <h3 class="section-title">
+                👤 Personal Information
+            </h3>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Full Name
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if request.user.first_name %}
+                            {{ request.user.first_name }}
+                            {{ request.user.last_name }}
+                        {% else %}
+                            {{ request.user.username }}
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Username
+                    </div>
+
+                    <div class="info-value">
+                        {{ request.user.username }}
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Email
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if request.user.email %}
+                            {{ request.user.email }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Phone
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if profile.phone %}
+                            {{ profile.phone }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- STUDENT INFORMATION -->
+
+            <h3 class="section-title">
+                🎓 Student Information
+            </h3>
+
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Roll Number
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if profile.roll_number %}
+                            {{ profile.roll_number }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Register Number
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if profile.register_number %}
+                            {{ profile.register_number }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Course
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if profile.course %}
+                            {{ profile.course }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Semester
+                    </div>
+
+                    <div class="info-value">
+
+                        {% if profile.semester %}
+                            {{ profile.semester }}
+                        {% else %}
+                            Not provided
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <a href="{% url 'edit_profile' %}" class="btn edit-btn">
+                    ✏️ Edit Profile
+                </a>
+
+                <a href="{% url 'student_dashboard' %}" class="btn dashboard-btn">
+                    ← Back to Dashboard
+                </a>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="profile-card">
+
+            <div class="empty">
+
+                <h2>Profile Not Found</h2>
+
+                <p>
+                    Your student profile has not been created yet.
+                </p>
+
+                <div class="actions" style="justify-content:center;">
+
+                    <a href="{% url 'student_dashboard' %}" class="btn dashboard-btn">
+                        ← Back to Dashboard
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 NOVA2026 — Intelligent Student Ecosystem
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA2026 | Verify Ticket</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(circle at top left, #26104f, transparent 35%),
+                radial-gradient(circle at bottom right, #073b52, transparent 35%),
+                #050816;
+        }
+
+        .navbar {
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5, 8, 22, 0.9);
+
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 3px;
+
+            color: #9b5cff;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #dbeafe;
+
+            padding: 9px 13px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(155,92,255,0.2);
+            color: white;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 700px;
+
+            margin: 70px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+
+            background: linear-gradient(
+                90deg,
+                #9b5cff,
+                #00e5ff
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .heading p {
+            color: #94a3b8;
+        }
+
+        .verify-card {
+            padding: 40px;
+
+            background: rgba(15,23,42,0.9);
+
+            border: 1px solid rgba(155,92,255,0.3);
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 0 40px rgba(123,92,255,0.15);
+
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .verify-card h2 {
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #cbd5e1;
+
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            background: rgba(255,255,255,0.06);
+
+            color: white;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #00e5ff;
+
+            box-shadow:
+                0 0 15px rgba(0,229,255,0.15);
+        }
+
+        input::placeholder {
+            color: #64748b;
+        }
+
+        .btn {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #0891b2
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(0,229,255,0.2);
+        }
+
+        .error {
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: rgba(239,68,68,0.12);
+
+            border: 1px solid rgba(239,68,68,0.3);
+
+            color: #f87171;
+        }
+
+        .success {
+            margin-top: 30px;
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            background: rgba(34,197,94,0.10);
+
+            border: 1px solid rgba(34,197,94,0.35);
+        }
+
+        .success-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .success h2 {
+            color: #4ade80;
+            margin-bottom: 20px;
+        }
+
+        .ticket-info {
+            text-align: left;
+
+            display: grid;
+
+            gap: 12px;
+        }
+
+        .info {
+            padding: 13px;
+
+            background: rgba(255,255,255,0.04);
+
+            border-radius: 10px;
+        }
+
+        .info span {
+            color: #94a3b8;
+        }
+
+        .info strong {
+            float: right;
+            color: white;
+        }
+
+        .back-btn {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 12px 20px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            color: white;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 35px;
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        @media(max-width:700px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
+
+            .verify-card {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        NOVA<span>2026</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'student_dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'events' %}">
+            Events
+        </a>
+
+        <a href="{% url 'my_tickets' %}">
+            🎟️ My Tickets
+        </a>
+
+        <a href="{% url 'student_profile' %}">
+            👤 Profile
+        </a>
+
+        <a href="{% url 'student_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="heading">
+
+        <h1>
+            🔍 Verify Ticket
+        </h1>
+
+        <p>
+            Verify a NOVA2026 digital event ticket
+        </p>
+
+    </div>
+
+
+    <div class="verify-card">
+
+        <div class="icon">
+            🎟️
+        </div>
+
+        <h2>
+            Ticket Verification System
+        </h2>
+
+        <p class="description">
+            Enter the Booking ID shown on the digital ticket.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label>
+                    Booking ID
+                </label>
+
+                <input
+                    type="number"
+                    name="booking_id"
+                    placeholder="Example: 12"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn"
+            >
+                🔍 Verify Ticket
+            </button>
+
+        </form>
+
+
+        {% if error %}
+
+            <div class="error">
+
+                {{ error }}
+
+            </div>
+
+        {% endif %}
+
+
+        {% if booking %}
+
+            <div class="success">
+
+                <div class="success-icon">
+                    ✅
+                </div>
+
+                <h2>
+                    TICKET VERIFIED
+                </h2>
+
+
+                <div class="ticket-info">
+
+                    <div class="info">
+
+                        <span>
+                            Booking ID
+                        </span>
+
+                        <strong>
+                            #{{ booking.id }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <span>
+                            Student
+                        </span>
+
+                        <strong>
+                            {{ booking.user.username }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <span>
+                            Event
+                        </span>
+
+                        <strong>
+                            {{ booking.event.title }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <span>
+                            Date
+                        </span>
+
+                        <strong>
+                            {{ booking.event.event_date|date:"d M Y" }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <span>
+                            Time
+                        </span>
+
+                        <strong>
+                            {{ booking.event.event_time|time:"h:i A" }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <span>
+                            Tickets
+                        </span>
+
+                        <strong>
+                            {{ booking.tickets }}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info">
+
+                        <span>
+                            Status
+                        </span>
+
+                        <strong>
+                            ✅ {{ booking.status }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+
+        <a
+            href="{% url 'my_tickets' %}"
+            class="back-btn"
+        >
+            ← Back to My Tickets
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 NOVA2026 — Intelligent Event Experience
+
+</footer>
+
+</body>
+
+</html>

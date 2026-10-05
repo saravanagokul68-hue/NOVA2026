@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOVA2026 | My Tickets</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+            background:
+                radial-gradient(circle at top left, #26104f, transparent 35%),
+                radial-gradient(circle at bottom right, #073b52, transparent 35%),
+                #050816;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5,8,22,0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #9b5cff;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #dbeafe;
+            padding: 9px 13px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(155,92,255,0.2);
+            color: white;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            margin: 55px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            background: linear-gradient(
+                90deg,
+                #9b5cff,
+                #00e5ff
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .heading p {
+            color: #94a3b8;
+        }
+
+        /* TICKET CARD */
+
+        .ticket-card {
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(155,92,255,0.3);
+            border-radius: 22px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow:
+                0 0 35px rgba(123,92,255,0.12);
+        }
+
+        .ticket-top {
+            padding: 25px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(155,92,255,0.18),
+                    rgba(0,229,255,0.08)
+                );
+        }
+
+        .ticket-top h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .ticket-id {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .ticket-content {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 1fr 180px;
+            gap: 25px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .detail {
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .label {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-weight: bold;
+            color: white;
+        }
+
+        /* QR */
+
+        .qr-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-area img {
+            width: 145px;
+            height: 145px;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .qr-area p {
+            margin-top: 10px;
+            color: #94a3b8;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* BUTTONS */
+
+        .actions {
+            padding: 20px 25px 25px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            color: white;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: rgba(155,92,255,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #2563eb
+            );
+            border: none;
+        }
+
+        .btn-cyan {
+            background: linear-gradient(
+                135deg,
+                #0891b2,
+                #2563eb
+            );
+            border: none;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            padding: 70px 25px;
+            background: rgba(15,23,42,0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 22px;
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .empty h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .ticket-content {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-area {
+                order: -1;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .heading h1 {
+                font-size: 30px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        NOVA<span>2026</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'student_dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'events' %}">
+            Events
+        </a>
+
+        <a href="{% url 'my_tickets' %}">
+            🎟️ My Tickets
+        </a>
+
+        <a href="{% url 'student_profile' %}">
+            👤 Profile
+        </a>
+
+        <a href="{% url 'student_logout' %}">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+    <div class="heading">
+
+        <h1>🎟️ My Tickets</h1>
+
+        <p>
+            Your NOVA2026 event bookings
+        </p>
+
+    </div>
+
+
+    <!-- TICKETS -->
+
+    {% if bookings %}
+
+        {% for booking in bookings %}
+
+            <div class="ticket-card">
+
+
+                <div class="ticket-top">
+
+                    <h2>
+                        🚀 {{ booking.event.title }}
+                    </h2>
+
+                    <div class="ticket-id">
+
+                        Booking ID:
+                        <strong>
+                            #{{ booking.id }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ticket-content">
+
+
+                    <!-- DETAILS -->
+
+                    <div class="details">
+
+
+                        <div class="detail">
+
+                            <div class="label">
+                                Location
+                            </div>
+
+                            <div class="value">
+                                📍 {{ booking.event.location }}
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="label">
+                                Date
+                            </div>
+
+                            <div class="value">
+
+                                📅
+                                {{ booking.event.event_date|date:"d M Y" }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="label">
+                                Time
+                            </div>
+
+                            <div class="value">
+
+                                ⏰
+                                {{ booking.event.event_time|time:"h:i A" }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="label">
+                                Tickets
+                            </div>
+
+                            <div class="value">
+
+                                🎫 {{ booking.tickets }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="label">
+                                Status
+                            </div>
+
+                            <div class="value">
+
+                                ✅ {{ booking.status }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="detail">
+
+                            <div class="label">
+                                Booking Date
+                            </div>
+
+                            <div class="value">
+
+                                {{ booking.booking_date|date:"d M Y" }}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- QR PLACEHOLDER -->
+
+                    <div class="qr-area">
+
+                        <div style="
+                            width:145px;
+                            height:145px;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            background:white;
+                            color:#111827;
+                            border-radius:12px;
+                            font-size:45px;
+                        ">
+
+                            🎟️
+
+                        </div>
+
+                        <p>
+                            Digital ticket available
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+
+                    <a
+                        href="{% url 'digital_ticket' booking.id %}"
+                        class="btn btn-primary"
+                    >
+                        🎟️ Digital Ticket
+                    </a>
+
+
+                    <a
+                        href="{% url 'verify_ticket' %}"
+                        class="btn btn-cyan"
+                    >
+                        🔍 Verify Ticket
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+        {% endfor %}
+
+
+    {% else %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🎟️
+            </div>
+
+            <h2>
+                No Tickets Yet
+            </h2>
+
+            <p>
+                You haven't booked any NOVA2026 events yet.
+            </p>
+
+            <a
+                href="{% url 'events' %}"
+                class="btn btn-primary"
+            >
+                🚀 Explore Events
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</main>
+
+
+<footer>
+
+    © 2026 NOVA2026 — Intelligent Event Experience
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Booking Confirmed | NOVA2026</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #172554,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #35145f,
+                    transparent 35%
+                ),
+                #070b17;
+
+            color: white;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            width: 100%;
+
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(5, 8, 20, 0.85);
+
+            border-bottom: 1px solid
+                rgba(255,255,255,0.08);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #00e5ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #d8deef;
+            text-decoration: none;
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00e5ff;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            flex: 1;
+
+            width: 90%;
+            max-width: 850px;
+
+            margin: 60px auto;
+        }
+
+        .success-card {
+            text-align: center;
+
+            padding: 50px 40px;
+
+            background: rgba(255,255,255,0.06);
+
+            border: 1px solid
+                rgba(255,255,255,0.1);
+
+            border-radius: 25px;
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.4);
+        }
+
+        /* =========================
+           SUCCESS ICON
+        ========================= */
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(0,229,255,0.12);
+
+            border: 2px solid #00e5ff;
+
+            color: #00e5ff;
+
+            font-size: 45px;
+
+            box-shadow:
+                0 0 35px
+                rgba(0,229,255,0.25);
+
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0% {
+                box-shadow:
+                    0 0 20px
+                    rgba(0,229,255,0.2);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 45px
+                    rgba(0,229,255,0.5);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 20px
+                    rgba(0,229,255,0.2);
+            }
+
+        }
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        .success-card h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .success-card h1 span {
+            color: #00e5ff;
+        }
+
+        .success-message {
+            color: #aab5cc;
+
+            font-size: 16px;
+
+            line-height: 1.6;
+
+            margin-bottom: 35px;
+        }
+
+        /* =========================
+           BOOKING DETAILS
+        ========================= */
+
+        .booking-details {
+            max-width: 600px;
+
+            margin: 0 auto 30px;
+
+            text-align: left;
+
+            background: rgba(0,0,0,0.2);
+
+            border: 1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius: 18px;
+
+            padding: 25px;
+        }
+
+        .details-title {
+            color: #00e5ff;
+
+            font-size: 18px;
+
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid
+                rgba(255,255,255,0.06);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #8f9ab3;
+        }
+
+        .detail-value {
+            color: #f2f5ff;
+
+            font-weight: bold;
+
+            text-align: right;
+        }
+
+        .ticket-id {
+            color: #00e5ff;
+
+            font-size: 18px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 18px;
+
+            border-radius: 30px;
+
+            background: rgba(0,255,150,0.1);
+
+            border: 1px solid
+                rgba(0,255,150,0.25);
+
+            color: #00ff9d;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 14px 25px;
+
+            border-radius: 12px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background:
+                linear-gradient(
+                    135deg,
+                    #00e5ff,
+                    #7c4dff
+                );
+
+            color: white;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,229,255,0.15);
+        }
+
+        .secondary-btn {
+            background: rgba(255,255,255,0.06);
+
+            border: 1px solid
+                rgba(255,255,255,0.12);
+
+            color: #dce2f2;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #66718b;
+
+            font-size: 13px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .success-card {
+                padding: 35px 20px;
+            }
+
+            .success-card h1 {
+                font-size: 30px;
+            }
+
+            .detail-row {
+                flex-direction: column;
+
+                gap: 5px;
+            }
+
+            .detail-value {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav>
+
+        <div class="logo">
+            NOVA<span>2026</span>
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'student_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'events' %}">
+                Events
+            </a>
+
+            <a href="{% url 'my_tickets' %}">
+                My Tickets
+            </a>
+
+            <a href="{% url 'student_profile' %}">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main>
+
+        <div class="success-card">
+
+
+            <!-- SUCCESS ICON -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Booking <span>Confirmed!</span>
+            </h1>
+
+
+            <p class="success-message">
+
+                Your event booking has been successfully
+                confirmed. Your NOVA2026 digital ticket
+                is ready.
+
+            </p>
+
+
+            <!-- =========================
+                 BOOKING DETAILS
+            ========================= -->
+
+            <div class="booking-details">
+
+                <div class="details-title">
+                    🎟️ Booking Details
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Event
+                    </span>
+
+                    <span class="detail-value">
+                        {{ booking.event.title }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Date
+                    </span>
+
+                    <span class="detail-value">
+                        {{ booking.event.event_date|date:"d M Y" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Time
+                    </span>
+
+                    <span class="detail-value">
+                        {{ booking.event.event_time|time:"g:i A" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Location
+                    </span>
+
+                    <span class="detail-value">
+                        {{ booking.event.location }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Tickets
+                    </span>
+
+                    <span class="detail-value">
+                        {{ booking.tickets }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Booking ID
+                    </span>
+
+                    <span class="detail-value ticket-id">
+                        NOVA-{{ booking.id|stringformat:"05d" }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Status
+                    </span>
+
+                    <span class="detail-value">
+
+                        <span class="status">
+                            ✓ CONFIRMED
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 BUTTONS
+            ========================= -->
+
+            <div class="buttons">
+
+                <a
+                    href="{% url 'digital_ticket' booking.id %}"
+                    class="btn primary-btn"
+                >
+                    🎫 View Digital Ticket
+                </a>
+
+
+                <a
+                    href="{% url 'my_tickets' %}"
+                    class="btn secondary-btn"
+                >
+                    My Tickets
+                </a>
+
+
+                <a
+                    href="{% url 'events' %}"
+                    class="btn secondary-btn"
+                >
+                    Browse Events
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        © 2026 NOVA2026 · Intelligent Event & Ticket Platform
+
+    </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>NOVA2026 | The Future of Events</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #080b16;
+            color: white;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            padding: 20px 7%;
+
+            background: rgba(16, 20, 38, 0.95);
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            border-bottom: 1px solid #202640;
+        }
+
+        .logo {
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: #8b6cff;
+
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+
+            text-decoration: none;
+
+            margin-left: 22px;
+
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #8b6cff;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            min-height: 78vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 70px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    #241d59 0%,
+                    #12142c 35%,
+                    #080b16 70%
+                );
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+
+            height: 400px;
+
+            border-radius: 50%;
+
+            border: 1px solid #342b6b;
+
+            opacity: 0.5;
+        }
+
+        .hero-content {
+
+            max-width: 900px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 9px 18px;
+
+            border-radius: 30px;
+
+            background: #171c32;
+
+            color: #a995ff;
+
+            border: 1px solid #393267;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+
+            font-size: 72px;
+
+            line-height: 1.05;
+
+            margin: 0;
+        }
+
+        .hero h1 span {
+
+            color: #8b6cff;
+        }
+
+        .hero p {
+
+            max-width: 700px;
+
+            margin: 25px auto;
+
+            color: #aeb5cc;
+
+            font-size: 20px;
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+
+            display: inline-block;
+
+            padding: 14px 25px;
+
+            border-radius: 11px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .primary {
+
+            background: #8b6cff;
+
+            color: white;
+        }
+
+        .primary:hover {
+
+            background: #6f52e8;
+
+            transform: translateY(-3px);
+        }
+
+        .secondary {
+
+            background: #171c32;
+
+            color: white;
+
+            border: 1px solid #343b58;
+        }
+
+        .secondary:hover {
+
+            border-color: #8b6cff;
+
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .stats {
+
+            width: 85%;
+
+            max-width: 1100px;
+
+            margin: -35px auto 70px;
+
+            position: relative;
+
+            z-index: 5;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(200px, 1fr)
+                );
+
+            gap: 20px;
+        }
+
+        .stat {
+
+            background: #12182a;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-radius: 18px;
+
+            border: 1px solid #29304a;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0, 0, 0, 0.25);
+        }
+
+        .stat h2 {
+
+            font-size: 32px;
+
+            color: #8b6cff;
+
+            margin: 0 0 8px;
+        }
+
+        .stat p {
+
+            color: #aeb5cc;
+
+            margin: 0;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .section {
+
+            width: 85%;
+
+            max-width: 1100px;
+
+            margin: 80px auto;
+        }
+
+        .section-heading {
+
+            text-align: center;
+
+            margin-bottom: 45px;
+        }
+
+        .section-heading h2 {
+
+            font-size: 38px;
+
+            margin-bottom: 12px;
+        }
+
+        .section-heading h2 span {
+
+            color: #8b6cff;
+        }
+
+        .section-heading p {
+
+            color: #aeb5cc;
+
+            font-size: 17px;
+        }
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(230px, 1fr)
+                );
+
+            gap: 25px;
+        }
+
+        .feature {
+
+            background: #12182a;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            border: 1px solid #29304a;
+
+            transition: 0.3s;
+
+            text-align: center;
+        }
+
+        .feature:hover {
+
+            transform: translateY(-6px);
+
+            border-color: #8b6cff;
+        }
+
+        .feature-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 18px;
+        }
+
+        .feature h3 {
+
+            font-size: 21px;
+
+            margin-bottom: 12px;
+        }
+
+        .feature p {
+
+            color: #aeb5cc;
+
+            line-height: 1.6;
+
+            margin: 0;
+        }
+
+        /* =========================
+           CTA
+        ========================= */
+
+        .cta {
+
+            width: 85%;
+
+            max-width: 1100px;
+
+            margin: 100px auto;
+
+            padding: 60px 30px;
+
+            text-align: center;
+
+            border-radius: 25px;
+
+            border: 1px solid #393267;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #19163c,
+                    #10172d
+                );
+        }
+
+        .cta h2 {
+
+            font-size: 40px;
+
+            margin-top: 0;
+        }
+
+        .cta p {
+
+            color: #aeb5cc;
+
+            font-size: 18px;
+
+            margin-bottom: 30px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 35px;
+
+            color: #6f7891;
+
+            border-top: 1px solid #1c2236;
+
+            margin-top: 80px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            nav {
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav a {
+
+                margin-left: 8px;
+
+                margin-right: 8px;
+            }
+
+            .hero h1 {
+
+                font-size: 45px;
+            }
+
+            .hero p {
+
+                font-size: 17px;
+            }
+
+            .section-heading h2 {
+
+                font-size: 30px;
+            }
+
+            .cta h2 {
+
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+    <div class="logo">
+        NOVA2026
+    </div>
+
+
+    <div>
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'student_login' %}">
+            Login
+        </a>
+
+        <a href="{% url 'events' %}">
+            Events
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+
+        <div class="badge">
+
+            🚀 THE FUTURE OF EVENT BOOKING
+
+        </div>
+
+
+        <h1>
+
+            Experience
+
+            <span>NOVA</span>
+
+        </h1>
+
+
+        <p>
+
+            Discover amazing events, reserve your tickets,
+            and experience a smarter generation of digital
+            event booking with NOVA2026.
+
+        </p>
+
+
+        <div class="buttons">
+
+
+            <a
+                href="{% url 'events' %}"
+                class="btn primary"
+            >
+
+                Explore Events 🚀
+
+            </a>
+
+
+            <a
+                href="{% url 'student_login' %}"
+                class="btn secondary"
+            >
+
+                Login
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PLATFORM STATS
+========================= -->
+
+<div class="stats">
+
+
+    <div class="stat">
+
+        <h2>
+            01
+        </h2>
+
+        <p>
+            Live Event
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2>
+            24/7
+        </h2>
+
+        <p>
+            Booking Access
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2>
+            100%
+        </h2>
+
+        <p>
+            Digital Experience
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2>
+            ∞
+        </h2>
+
+        <p>
+            Future Possibilities
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="section">
+
+
+    <div class="section-heading">
+
+        <h2>
+
+            Why Choose
+            <span>NOVA?</span>
+
+        </h2>
+
+        <p>
+
+            Everything you need for a modern
+            event-booking experience.
+
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎟️
+            </div>
+
+            <h3>
+                Easy Booking
+            </h3>
+
+            <p>
+
+                Select an event and reserve
+                your tickets in just a few clicks.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🚀
+            </div>
+
+            <h3>
+                Future Events
+            </h3>
+
+            <p>
+
+                Discover concerts, festivals,
+                sports and exciting experiences.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔐
+            </div>
+
+            <h3>
+                Secure Account
+            </h3>
+
+            <p>
+
+                Your account and booking
+                information stay connected securely.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🎫
+            </div>
+
+            <h3>
+                Digital Tickets
+            </h3>
+
+            <p>
+
+                Access your booking history
+                anytime through My Tickets.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CALL TO ACTION
+========================= -->
+
+<section class="cta">
+
+    <h2>
+
+        Ready for your next
+        <span style="color:#8b6cff;">
+            experience?
+        </span>
+
+    </h2>
+
+
+    <p>
+
+        Explore NOVA events and book
+        your next unforgettable experience.
+
+    </p>
+
+
+    <a
+        href="{% url 'events' %}"
+        class="btn primary"
+    >
+
+        Explore Events 🚀
+
+    </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 NOVA2026 · Experience the Future 🚀
+
+</footer>
+
+
+</body>
+
+</html>
