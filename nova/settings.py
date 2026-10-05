@@ -13,13 +13,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 # =========================================================
 
-SECRET_KEY = "django-insecure-change-this-secret-key-later"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-local-development-key"
+)
 
-DEBUG = True
+DEBUG = os.environ.get(
+    "DEBUG",
+    "True"
+).lower() == "true"
 
-ALLOWED_HOSTS = [
-    "*"
-]
+ALLOWED_HOSTS = os.environ.get(
+    "ALLOWED_HOSTS",
+    "127.0.0.1,localhost"
+).split(",")
 
 
 # =========================================================
@@ -36,7 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # Our App
+    # NOVA2026
     "accounts",
 ]
 
@@ -67,7 +74,7 @@ MIDDLEWARE = [
 # URL CONFIGURATION
 # =========================================================
 
-ROOT_URLCONF = "NOVA2026.urls"
+ROOT_URLCONF = "nova.urls"
 
 
 # =========================================================
@@ -77,7 +84,8 @@ ROOT_URLCONF = "NOVA2026.urls"
 TEMPLATES = [
 
     {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "BACKEND":
+            "django.template.backends.django.DjangoTemplates",
 
         "DIRS": [
             BASE_DIR / "templates"
@@ -105,7 +113,7 @@ TEMPLATES = [
 # WSGI
 # =========================================================
 
-WSGI_APPLICATION = "NOVA2026.wsgi.application"
+WSGI_APPLICATION = "nova.wsgi.application"
 
 
 # =========================================================
@@ -166,7 +174,6 @@ LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "Asia/Kolkata"
 
-
 USE_I18N = True
 
 USE_TZ = True
@@ -176,7 +183,7 @@ USE_TZ = True
 # STATIC FILES
 # =========================================================
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
